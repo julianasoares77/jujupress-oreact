@@ -1,14 +1,18 @@
+// src/App.jsx
 import "./styles/theme.css";
 import "./styles/global.css";
-// import { MyTextList } from "./components/MyTextList";
-import { MyGrid } from "./components/MyGrid";
 
-export default function App() {
-
+import { Main } from "./components/Main";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
+function App() {
   return (
-    // React Fragment
     <>
-      <MyGrid />
+      <Header />;
+      <Main />;
+      <Footer />;
     </>
-  );
+  )
 }
+
+export default App;

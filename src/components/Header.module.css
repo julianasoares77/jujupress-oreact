@@ -1,0 +1,39 @@
+.header1 {
+  grid-area: header1;
+  background-color: var(--primary-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .header1 {
+    flex-direction: column;
+  }
+}
+
+.header1 h1 {
+  font-weight: bolder;
+  font-size: 5rem;
+  color: var(--primary-contrast-light);
+  text-align: center;
+  margin-left: 40px;
+  font-family: inherit;
+}
+
+.header1 svg {
+  width: 6rem;
+  height: 6rem;
+  font-size: 6rem;
+  border-radius: 1rem;
+  color: var(--primary-contrast-light);
+}
+
+@media (max-width: 768px) {
+  .header1 svg {
+    width: 12rem;
+    height: 12rem;
+    font-size: 12rem;
+    display: flex;
+  }
+}
