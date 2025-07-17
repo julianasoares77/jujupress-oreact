@@ -1,21 +1,24 @@
-// src/App.jsx
 import "./styles/theme.css";
 import "./styles/global.css";
-
-// import { Main } from "./components/Main";
+import { ProductList } from "./components/ProductList";
 import { Header } from "./components/Header";
-// import { Footer } from "./components/Footer";
-import { LuckyNumber } from "./components/LuckyNumber";
-function App() {
+import { useState } from "react";
+
+export default function App() {
+  
+  const [cart, setCart] = useState([]);
+
+  function addToCart(product) {
+    setCart((prevCart) => [...prevCart, product]);
+  }
+
   return (
+    //React Fragment
     <>
-      
-      <Header />
-      {/* <Main />; */}
-      {/* <Footer />; */}
-      <LuckyNumber />
+      <Header cart={cart} />
+      <ProductList addToCart={addToCart} />
     </>
-  )
+  );
 }
 
-export default App;
+
