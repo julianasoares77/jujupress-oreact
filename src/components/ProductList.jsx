@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import styles from "./ProductList.module.css";
 import { CircularProgress } from "@mui/material";
-import { Product } from "./Product.jsx";
+import { Product } from "./Product";
 
-export function ProductList({addToCart}) {
-  const category = "smartphones";
-  const limit = 10;
-  const apiUrl = `https://dummyjson.com/products/category/${category}?limit=${limit}&select=id,thumbnail,title,price,description`;
+export function ProductList({ addToCart }) {
+  var category = "smartphones";
+  var limit = 10;
+  var apiUrl = `https://dummyjson.com/products/category/${category}?limit=${limit}&select=id,thumbnail,title,price,description`;
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -24,31 +24,27 @@ export function ProductList({addToCart}) {
         setLoading(false);
       }
     }
-
     fetchProducts();
   }, []);
 
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-
-</header>
+      <div className={styles.productList}>
+        {products.map((product) => (
+          <Product key={product.id} product={product} addToCart={addToCart} />
+        ))}
+      </div>
       {loading && (
         <div>
           <CircularProgress
             thickness={5}
             style={{ margin: "2rem auto", display: "block" }}
-            sx={{ color: "#ffffffff" }}
+            sx={{ color: "#001111" }}
           />
           <p>Loading products...</p>
         </div>
       )}
       {error && <p>Error loading products: {error.message} ❌</p>}
-      <div className={styles.productGrid}>
-        {products.map((product) => (
-          <Product key={product.id} product={product} addToCart={addToCart} />
-        ))}
-      </div>
     </div>
   );
 }

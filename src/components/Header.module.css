@@ -4,11 +4,12 @@
   justify-content: space-between;
   gap: 3rem;
   padding: 5rem;
-  background-color: white;
+  background-color: rgb(255, 0, 0);
 }
 .container h1 {
   font-size: 5rem;
   font-weight: bolder;
+  color: rgb(255, 255, 255);
 }
 .containerImg img {
   height: auto;
@@ -19,9 +20,14 @@
 .cartInfo {
   border-radius: 3rem;
   background-color: var(--primary-light);
-  color: var(--primary-contrast-dark);
+  color: black;
   padding: 2rem;
   font-size: 3rem;
   font-weight: bold;
   text-align: center;
+}
+
+.link {
+  text-decoration: none;
+  color: var(--primary);
 }
