@@ -8,10 +8,15 @@ export function Product({ product, addToCart }) {
         alt={product.title}
         className={styles.productImage}
       />
-      <h2 className={styles.productTitle}>{product.title}</h2>
-      <p className={styles.productPrice}>Price: ${product.price}</p>
+      <h3 className={styles.productTitle}>{product.title}</h3>
+      <p className={styles.productPrice}>R$ {product.price.toFixed(2)}</p>
       <p className={styles.productDescription}>{product.description}</p>
-      <button onClick={() => addToCart(product)} className={styles.addToCartButton}>Add to cart</button>
+      <button
+        className={styles.addToCartButton}
+        onClick={() => addToCart(product)}
+      >
+        Adicionar ao carrinho
+      </button>
     </div>
   );
 }

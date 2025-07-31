@@ -1,6 +1,12 @@
 import styles from "./Cart.module.css";
+import { useContext } from "react";
+import { CartContext } from "../service/CartContext";
+import { useNavigate } from "react-router-dom";
 
-export function Cart({ cart, increaseQuantity, decreaseQuantity, clearCart }) {
+export function Cart() {
+  const { cart, increaseQuantity, decreaseQuantity, clearCart } = useContext(CartContext);
+  const navigate = useNavigate();
+
   const total = cart.reduce(
     (sum, item) => sum + item.price * (item.quantity || 1),
     0
@@ -11,7 +17,15 @@ export function Cart({ cart, increaseQuantity, decreaseQuantity, clearCart }) {
       <h2>Carrinho de Compras</h2>
 
       {cart.length === 0 ? (
-        <p className={styles.empty}>Seu carrinho está vazio.</p>
+        <>
+          <p className={styles.empty}>Seu carrinho está vazio.</p>
+          <button
+            className={styles.back}
+            onClick={() => navigate("/")}
+          >
+            VOLTAR
+          </button>
+        </>
       ) : (
         <>
           <button className={styles.removeAll} onClick={clearCart}>
@@ -39,7 +53,7 @@ export function Cart({ cart, increaseQuantity, decreaseQuantity, clearCart }) {
             <p>Total: <strong>R$ {total.toFixed(2)}</strong></p>
             <div className={styles.buttons}>
               <button className={styles.continue}>CONTINUAR</button>
-              <button className={styles.back}>VOLTAR</button>
+              <button className={styles.back} onClick={() => navigate("/")}>VOLTAR</button>
             </div>
           </div>
         </>
@@ -47,3 +61,6 @@ export function Cart({ cart, increaseQuantity, decreaseQuantity, clearCart }) {
     </div>
   );
 }
+
+
+

@@ -1,39 +1,29 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import styles from "./ProductList.module.css";
 import { CircularProgress } from "@mui/material";
 import { Product } from "./Product";
+import { CartContext } from "../service/CartContext";
 
-export function ProductList({ addToCart }) {
-  var category = "smartphones";
-  var limit = 10;
-  var apiUrl = `https://dummyjson.com/products/category/${category}?limit=${limit}&select=id,thumbnail,title,price,description`;
-
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        setProducts(data.products);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchProducts();
-  }, []);
+export function ProductList() {
+  const { filteredProducts, loading, error, addToCart, searchTerm, setSearchTerm } = useContext(CartContext);
 
   return (
     <div className={styles.container}>
+      {/* Campo de busca */}
+      <input
+        type="text"
+        placeholder="Pesquisar produtos..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className={styles.searchInput}
+      />
+
       <div className={styles.productList}>
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <Product key={product.id} product={product} addToCart={addToCart} />
         ))}
       </div>
+
       {loading && (
         <div>
           <CircularProgress
@@ -41,10 +31,10 @@ export function ProductList({ addToCart }) {
             style={{ margin: "2rem auto", display: "block" }}
             sx={{ color: "#001111" }}
           />
-          <p>Loading products...</p>
+          <p>Carregando produtos...</p>
         </div>
       )}
-      {error && <p>Error loading products: {error.message} ❌</p>}
+      {error && <p>Erro ao carregar produtos: {error.message} ❌</p>}
     </div>
   );
 }
